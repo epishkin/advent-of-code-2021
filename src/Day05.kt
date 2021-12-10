@@ -31,11 +31,8 @@ fun main() {
                 else
                     xs.zip(ys).map { (x, y) -> Point(x, y) }
             }
-            .groupBy(keySelector = { it }, valueTransform = { 1 })
-            .map { (key, list) ->
-                if (list.size > 1) 1 else 0
-            }
-            .sum()
+            .groupingBy(keySelector = { it }).eachCount()
+            .count { (_, count) -> (count > 1) }
     }
 
     fun part1(input: List<String>): Int {
